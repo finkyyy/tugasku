@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#F472B6" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <title>TugasKu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            cute: ['Pacifico', 'cursive'],
+            body: ['Quicksand', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif']
+          },
+          colors: {
+            blush: {
+              50: '#FFF1F5',
+              100: '#FFE4EC',
+              200: '#FED7AA',
+              300: '#FBCFE8',
+              400: '#F472B6',
+              500: '#EC4899',
+              600: '#DB2777'
+            },
+            plum: {
+              700: '#5B2A4A',
+              600: '#9D6B88'
+            },
+            lavender: {
+              200: '#F3E8FF',
+              300: '#E9D5FF',
+              400: '#C4B5FD'
+            },
+            rose: {
+              400: '#FB7185'
+            },
+            mint: {
+              100: '#BBF7D0'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --pink-grad-start: #FFF1F5;
+      --pink-grad-mid: #FFE4EC;
+      --pink-grad-end: #F3E8FF;
+    }
+    body {
+      font-family: 'Quicksand', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 10% 10%, var(--pink-grad-end) 0%, transparent 60%),
+                  radial-gradient(1000px 700px at 90% 0%, #FED7AA33 0%, transparent 55%),
+                  linear-gradient(180deg, var(--pink-grad-start) 0%, var(--pink-grad-mid) 100%);
+      color: #5B2A4A;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    .bg-dots {
+      background-image: radial-gradient(#F472B633 1px, transparent 1px);
+      background-size: 16px 16px;
+      opacity: 0.4;
+    }
+    .butterfly {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      filter: drop-shadow(0 4px 10px #F472B633);
+      animation: float 6s ease-in-out infinite;
+    }
+    .butterfly.b1 { top: 10%; left: 4%; animation-delay: 0s; }
+    .butterfly.b2 { top: 18%; right: 6%; animation-delay: 1.2s; }
+    .butterfly.b3 { bottom: 14%; left: 8%; animation-delay: 2.1s; }
+    .butterfly.b4 { bottom: 10%; right: 10%; animation-delay: 0.8s; }
+    .butterfly.b5 { top: 50%; left: 2%; animation-delay: 1.8s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(-2deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+    .wing {
+      transform-origin: 50% 50%;
+      animation: flap 1.8s ease-in-out infinite;
+    }
+    .wing.delay { animation-delay: 0.2s; }
+    @keyframes flap {
+      0%, 100% { transform: scaleX(1); }
+      50% { transform: scaleX(0.7); }
+    }
+    .card-anim {
+      animation: cardIn 0.25s ease-out;
+    }
+    .card-out {
+      animation: cardOut 0.2s ease-in forwards;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes cardOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(4px); }
+    }
+    .urgent-pulse {
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.25); }
+      50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.08); }
+    }
+    .heart-icon {
+      display: inline-block;
+      vertical-align: middle;
+      transform-origin: center;
+    }
+    .heart-full {
+      animation: heartBeat 1.8s ease-in-out infinite, heartPop 0.35s ease-out;
+    }
+    .heart-broken {
+      animation: heartSway 2.8s ease-in-out infinite, heartPop 0.35s ease-out;
+    }
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    @keyframes heartSway {
+      0%, 100% { transform: rotate(-4deg); }
+      50% { transform: rotate(4deg); }
+    }
+    @keyframes heartPop {
+      0% { transform: scale(0.6); opacity: 0.4; }
+      70% { transform: scale(1.15); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .butterfly, .wing, .card-anim, .card-out, .urgent-pulse, .heart-icon {
+        animation: none !important;
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="min-h-screen">
+  <div class="bg-dots fixed inset-0 pointer-events-none -z-10"></div>
+  <svg class="butterfly b1 w-10 h-10" aria-hidden="true" viewBox="0 0 64 64">
+    <g fill="#F472B6">
+      <path class="wing" d="M32 32 C20 10, 4 14, 12 32 C4 50, 20 54, 32 32Z"/>
+      <path class="wing delay" d="M32 32 C44 10, 60 14, 52 32 C60 50, 44 54, 32 32Z"/>
+    </g>
+    <circle cx="32" cy="32" r="2" fill="#5B2A4A"/>
+  </svg>
+  <svg class="butterfly b2 w-9 h-9" aria-hidden="true" viewBox="0 0 64 64">
+    <g fill="#C4B5FD">
+      <path class="wing" d="M32 32 C20 10, 4 14, 12 32 C4 50, 20 54, 32 32Z"/>
+      <path class="wing delay" d="M32 32 C44 10, 60 14, 52 32 C60 50, 44 54, 32 32Z"/>
+    </g>
+    <circle cx="32" cy="32" r="2" fill="#5B2A4A"/>
+  </svg>
+  <svg class="butterfly b3 w-8 h-8" aria-hidden="true" viewBox="0 0 64 64">
+    <g fill="#FB7185">
+      <path class="wing" d="M32 32 C20 10, 4 14, 12 32 C4 50, 20 54, 32 32Z"/>
+      <path class="wing delay" d="M32 32 C44 10, 60 14, 52 32 C60 50, 44 54, 32 32Z"/>
+    </g>
+    <circle cx="32" cy="32" r="2" fill="#5B2A4A"/>
+  </svg>
+  <svg class="butterfly b4 w-9 h-9" aria-hidden="true" viewBox="0 0 64 64">
+    <g fill="#F472B6">
+      <path class="wing" d="M32 32 C20 10, 4 14, 12 32 C4 50, 20 54, 32 32Z"/>
+      <path class="wing delay" d="M32 32 C44 10, 60 14, 52 32 C60 50, 44 54, 32 32Z"/>
+    </g>
+    <circle cx="32" cy="32" r="2" fill="#5B2A4A"/>
+  </svg>
+  <svg class="butterfly b5 w-7 h-7" aria-hidden="true" viewBox="0 0 64 64">
+    <g fill="#C4B5FD">
+      <path class="wing" d="M32 32 C20 10, 4 14, 12 32 C4 50, 20 54, 32 32Z"/>
+      <path class="wing delay" d="M32 32 C44 10, 60 14, 52 32 C60 50, 44 54, 32 32Z"/>
+    </g>
+    <circle cx="32" cy="32" r="2" fill="#5B2A4A"/>
+  </svg>
+
+  <main class="relative z-10 w-full max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+    <header class="mb-6 text-center">
+      <div class="flex items-center justify-center gap-2 mb-1">
+        <svg class="w-6 h-6" aria-hidden="true" viewBox="0 0 64 64"><g fill="#F472B6"><path d="M32 12 C26 18, 18 18, 16 26 C14 36, 22 44, 32 40 C42 44, 50 36, 48 26 C46 18, 38 18, 32 12Z"/></g></svg>
+        <h1 class="text-3xl sm:text-4xl font-cute bg-gradient-to-r from-blush-400 to-rose-400 bg-clip-text text-transparent drop-shadow-sm">TugasKu</h1>
+        <svg class="w-6 h-6" aria-hidden="true" viewBox="0 0 64 64"><g fill="#C4B5FD"><path d="M32 12 C26 18, 18 18, 16 26 C14 36, 22 44, 32 40 C42 44, 50 36, 48 26 C46 18, 38 18, 32 12Z"/></g></svg>
+      </div>
+      <p class="text-sm text-plum-600">Semangat ya, tugasnya pasti beres! 🌸</p>
+    </header>
+
+    <!-- Form -->
+    <section class="bg-white/80 backdrop-blur rounded-3xl shadow-[0_10px_40px_-10px_rgba(244,114,182,0.4)] border border-pink-100 p-4 sm:p-6 mb-6" aria-labelledby="form-heading">
+      <h2 id="form-heading" class="sr-only">Form Tambah Tugas</h2>
+      <form id="task-form" class="space-y-4" novalidate>
+        <div>
+          <label for="nama-tugas" class="block text-sm font-semibold mb-1 text-plum-700">Tugas apa nih? ✏️</label>
+          <input id="nama-tugas" type="text" required placeholder="Contoh: Laporan Praktikum Basis Data" autocomplete="off"
+            class="w-full rounded-2xl border border-pink-200 px-3 py-2 bg-white/90 text-plum-700 placeholder:text-plum-600/60 focus:outline-none focus:ring-2 focus:ring-blush-400 focus:border-blush-400" />
+        </div>
+        <div>
+          <label for="deadline" class="block text-sm font-semibold mb-1 text-plum-700">Deadline-nya kapan? ⏰</label>
+          <input id="deadline" type="datetime-local" required
+            class="w-full rounded-2xl border border-pink-200 px-3 py-2 bg-white/90 text-plum-700 focus:outline-none focus:ring-2 focus:ring-blush-400 focus:border-blush-400" />
+        </div>
+        <button type="submit" id="submit-btn"
+          class="w-full bg-gradient-to-r from-blush-400 to-rose-400 hover:from-blush-500 hover:to-rose-500 active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-blush-400 focus:ring-offset-2 text-white font-bold rounded-full py-2.5 transition-all shadow-[0_8px_30px_-12px_rgba(244,114,182,0.9)]">
+          🌷 Tambah Tugas
+        </button>
+      </form>
+    </section>
+
+    <!-- Filters -->
+    <section class="flex flex-col sm:flex-row gap-2 mb-4" id="filters" role="group" aria-label="Filter tugas">
+      <button type="button" data-filter="all" class="filter-btn flex-1 rounded-full px-3 py-2 text-sm font-semibold border focus:outline-none focus:ring-2 focus:ring-blush-400"><span aria-hidden="true">🌸</span> Semua</button>
+      <button type="button" data-filter="undone" class="filter-btn flex-1 rounded-full px-3 py-2 text-sm font-semibold border focus:outline-none focus:ring-2 focus:ring-blush-400"><span aria-hidden="true">💔</span> Belum Dikerjakan</button>
+      <button type="button" data-filter="done" class="filter-btn flex-1 rounded-full px-3 py-2 text-sm font-semibold border focus:outline-none focus:ring-2 focus:ring-blush-400"><span aria-hidden="true">❤️</span> Sudah Dikerjakan</button>
+    </section>
+
+    <!-- Task list -->
+    <section aria-live="polite" aria-label="Daftar tugas">
+      <p id="status" class="text-center text-sm text-plum-600 mb-3 hidden" role="status"></p>
+      <ul id="task-list" class="space-y-3"></ul>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch((err) => {
+          console.error('SW registration failed:', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
